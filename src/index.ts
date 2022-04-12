@@ -49,7 +49,7 @@ export const createWeek = ({ date, baseMonth, pattern, weekStartsOn, holyDays }:
 
     if (!isFirstWeek) isFirstWeek = isSameDay(day, startOfMonth(baseMonth));
 
-    if (isLastWeek) isLastWeek = isSameDay(day, endOfMonth(baseMonth));
+    if (!isLastWeek) isLastWeek = isSameDay(day, endOfMonth(baseMonth));
 
     dayOfWeek++;
   }
@@ -92,3 +92,11 @@ export const createMonthMatrix = ({
 
   return matrix;
 };
+console.log(
+  createMonthMatrix({
+    year: 2022,
+    month: 0,
+  }),
+);
+
+console.log('end');
