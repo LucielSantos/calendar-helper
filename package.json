@@ -2,16 +2,26 @@
   "name": "calendar-helper",
   "version": "1.0.0",
   "description": "Calendar helper library to use in calendars.",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "keywords": [
+    "date",
+    "calendar",
+    "date-helper"
+  ],
   "scripts": {
     "start": "nodemon",
     "build": "tsc",
-    "prepare": "npm run build",
     "lint": "npx eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier \"**/*.{ts,tsx}\" --check",
     "prettier:fix": "npm run prettier -- --write",
-    "format": "npm run prettier:fix && npm run lint:fix"
+    "format": "npm run prettier:fix && npm run lint:fix",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run lint && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "author": "",
   "license": "ISC",
