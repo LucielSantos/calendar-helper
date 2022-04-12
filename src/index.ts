@@ -1,12 +1,4 @@
-import {
-  addWeeks,
-  endOfMonth,
-  format,
-  isSameDay,
-  isWeekend,
-  setDay,
-  startOfMonth,
-} from "date-fns";
+import { addWeeks, endOfMonth, format, isSameDay, isWeekend, setDay, startOfMonth } from 'date-fns';
 
 export type WeekStarsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -33,13 +25,7 @@ export interface ICreateMonthMatrix {
   holyDays?: HolyDay[];
 }
 
-export const createWeek = ({
-  date,
-  baseMonth,
-  pattern,
-  weekStartsOn,
-  holyDays,
-}: ICreateWeek) => {
+export const createWeek = ({ date, baseMonth, pattern, weekStartsOn, holyDays }: ICreateWeek) => {
   const week = [];
   let dayOfWeek = 0;
 
@@ -49,11 +35,9 @@ export const createWeek = ({
   while (dayOfWeek < 7) {
     const day = setDay(date, dayOfWeek, { weekStartsOn });
 
-    const formattedDate = pattern
-      ? format(day, pattern, { weekStartsOn })
-      : day;
+    const formattedDate = pattern ? format(day, pattern, { weekStartsOn }) : day;
 
-    const holyDay = holyDays?.find((holyDay) => isSameDay(holyDay.date, day));
+    const holyDay = holyDays?.find(mapHolyDay => isSameDay(mapHolyDay.date, day));
 
     const objToAdd = {
       date: formattedDate,
@@ -63,8 +47,9 @@ export const createWeek = ({
 
     week.push(objToAdd);
 
-    !isFirstWeek && (isFirstWeek = isSameDay(day, startOfMonth(baseMonth)));
-    !isLastWeek && (isLastWeek = isSameDay(day, endOfMonth(baseMonth)));
+    if (!isFirstWeek) isFirstWeek = isSameDay(day, startOfMonth(baseMonth));
+
+    if (isLastWeek) isLastWeek = isSameDay(day, endOfMonth(baseMonth));
 
     dayOfWeek++;
   }
