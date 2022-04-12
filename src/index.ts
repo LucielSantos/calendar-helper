@@ -92,11 +92,3 @@ export const createMonthMatrix = ({
 
   return matrix;
 };
-console.log(
-  createMonthMatrix({
-    year: 2022,
-    month: 0,
-  }),
-);
-
-console.log('end');
