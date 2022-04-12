@@ -5,6 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "nodemon",
+    "build": "tsc",
+    "prepare": "npm run build",
     "lint": "npx eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier \"**/*.{ts,tsx}\" --check",
@@ -13,6 +15,9 @@
   },
   "author": "",
   "license": "ISC",
+  "files": [
+    "lib/**/*"
+  ],
   "dependencies": {
     "date-fns": "^2.28.0"
   },
